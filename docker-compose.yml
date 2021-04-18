@@ -2,7 +2,8 @@ version: "3"
 
 services:
   web:
-    image: "ultramari/myfirstapp:2.0"
+    build: .
+    #image: "ultramari/myfirstapp:2.0"
     container_name: web
     networks:
       labdocker:
@@ -10,7 +11,7 @@ services:
     ports:
       - "80:80"
     environment:
-      - MESSAGE="aaaaaaaaaa"
+      - MESSAGE=aaaaaaaaaa
 
   redis:
     image: redis
