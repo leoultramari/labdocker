@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  web:
+    image: "ultramari/myfirstapp:2.0"
+    container_name: web
+    networks:
+      labdocker:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "80:80"
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "/srv/redis/data:/data"
+    command: "redis-server --appendonly yes"
+    networks:
+      labdocker:
+        ipv4_address: 172.20.0.3
+
+networks:
+  labdocker:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
