@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myfirstapp-leonardo-deployment
+  labels:
+    app: myfirstapp-leonardo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myfirstapp-leonardo
+  template:
+    metadata:
+      labels:
+        app: myfirstapp-leonardo
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+          - containerPort: 6379
+            name: redis
+            protocol: TCP
+      - name: app
+        image: gcr.io/alunosturma04/myfirstapp-leonardo:4.0
+        env:
+        - name: MESSAGE
+          value: "python app test 2"
+        - name: "REDIS_HOST"
+          value: "localhost"
+        ports:
+         - containerPort: 80
+
+
+
